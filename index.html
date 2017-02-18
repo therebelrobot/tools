@@ -35,7 +35,7 @@
         when = JSON.parse(when)
         now = now.subtract.apply(now, when)
       }
-      pretty = now.format('ddd MM-DD HH:mm:ss)
+      pretty = now.format('ddd MM-DD HH:mm:ss')
       unix = now.unix()
       $thisClock.text('')
       $thisClock.append(pretty)
