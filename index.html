@@ -1,0 +1,51 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" />
+</head>
+<body>
+
+<section class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Now in unix</div>
+        <div class="panel-body in-unix" data-when="now">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+<script>
+  $(document).ready(init)
+  function init () {
+     unixClock()
+  }
+  function unixClock () {
+    $('.in-unix').each(function(){
+      var $thisClock = $(this)
+      var when = $thisClock.attr('data-when')
+      var pretty, unix
+      var now = moment(new Date())
+      if (when !== 'now') {
+        when = JSON.parse(when)
+        now = now.subtract.apply(now, when)
+      }
+      pretty = now.format()
+      unix = now.unix()
+      $thisClock.text('')
+      $thisClock.append(pretty)
+      $thisClock.append('<br />)
+      $thisClock.append(unix)
+    })
+    setTimeout(function(){
+      unixClock()
+    }, 1000)
+  }
+</script>
+</body>
+</html>
